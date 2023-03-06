@@ -23,5 +23,5 @@ public class Movement : MonoBehaviour
         transform.forward = Vector3.Slerp(transform.forward, direction, Time.deltaTime * TurnSmoothTime);
 
     }
-
+    // LOL
 }
