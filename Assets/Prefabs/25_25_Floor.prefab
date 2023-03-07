@@ -304,6 +304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9d3f487caed664182d5870cce7b28a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Box: {fileID: 6631823800770782424, guid: bb4e0c0f358fac343876acc51221cfbc, type: 3}
+  MinX: -10
+  MinZ: -10
+  MaxX: 10
+  MaxZ: 10
 --- !u!1 &7885266721303565515
 GameObject:
   m_ObjectHideFlags: 0
