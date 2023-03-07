@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     private float Horizontal, Vertical;
     public float TurnSmoothTime = 0.1f;
     float TurnSmoothVel;
+    public Animator animator;
 
     // Update is called once per frame
     void Update()
