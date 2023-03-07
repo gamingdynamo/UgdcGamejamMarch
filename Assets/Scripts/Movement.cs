@@ -17,6 +17,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Horizontal = Input.GetAxis("Horizontal");
+        Vertical = Input.GetAxis("Vertical");
+
         Vector3 direction = new Vector3(Horizontal, 0f, Vertical).normalized;
 
         body.velocity = new Vector3(Input.GetAxis("Horizontal"),0f, Input.GetAxis("Vertical"))*movespeed;
