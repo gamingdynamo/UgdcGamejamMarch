@@ -700,8 +700,8 @@ MonoBehaviour:
   cam: {fileID: 1324081101}
   Offset: {x: 0, y: -5, z: 0}
   rotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
-  MovementSensitivity: 1
-  TurnSmoothTime: 1
+  MovementSensitivity: 2
+  TurnSmoothTime: 0.1
 --- !u!54 &2061669613
 Rigidbody:
   m_ObjectHideFlags: 0
