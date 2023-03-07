@@ -31,6 +31,15 @@ public class Movement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, targetangle, 0f);
 
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y,targetangle , ref TurnSmoothVel , TurnSmoothTime );
+
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) )
+        {
+            animator.SetFloat("speed", 0.5f);
+        }
+        else
+        {
+            animator.SetFloat("speed", 0);
+        }
     }
 
     private void LateUpdate()
