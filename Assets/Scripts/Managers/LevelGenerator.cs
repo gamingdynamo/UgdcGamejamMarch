@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private int LeftSpawnIndex;
     [SerializeField] private int RightSpawnIndex;
 
-    private int NoofTileSpawned;
+    public int NoofTileSpawned;
     private float TileXLength;
     private Vector3 CurrentTilePosition;
 
@@ -29,7 +29,6 @@ public class LevelGenerator : MonoBehaviour
         player = FindObjectOfType<Movement>();
         player.OnNewTileEntered += Player_OnNewTileEntered;
         InitialPosition = Vector3.zero;
-        NoofTileSpawned = 1;
         TileXLength = Floors[0].transform.localScale.x;
     }
 
@@ -42,22 +41,22 @@ public class LevelGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            SpawnOnLeft(CurrentTilePosition);
+            SpawnOnLeft();
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
-            SpawnOnRight(CurrentTilePosition);
+            SpawnOnRight();
         }
     }
     
-    void SpawnOnLeft(Vector3 currenttielpos)
+    public void SpawnOnLeft()
     {
         Debug.Log("Spawning on Left");
-        GameObject newTile = Instantiate(Floors[0].gameObject, new Vector3((currenttielpos.x * NoofTileSpawned) - TileXLength, 0, 0), Quaternion.identity);
+        GameObject newTile = Instantiate(Floors[0].gameObject, new Vector3((CurrentTilePosition.x) - TileXLength, 0, 0), Quaternion.identity);
     }
-    void SpawnOnRight(Vector3 currenttielpos)
+    public void SpawnOnRight()
     {
         Debug.Log("Spawning on Right");
-        GameObject newTile = Instantiate(Floors[0].gameObject, new Vector3((currenttielpos.x * NoofTileSpawned) + TileXLength, 0, 0), Quaternion.identity);
+        GameObject newTile = Instantiate(Floors[0].gameObject, new Vector3((CurrentTilePosition.x + NoofTileSpawned) + TileXLength, 0, 0), Quaternion.identity);
     }
 }
