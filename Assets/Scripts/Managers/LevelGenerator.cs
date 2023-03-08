@@ -13,7 +13,7 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    private Movement player;
+    private Movement2 player;
     [SerializeField] private List<GameObject> Floors = new List<GameObject>();
     [SerializeField] private Vector3 InitialPosition;
 
@@ -26,7 +26,7 @@ public class LevelGenerator : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<Movement>();
+        player = FindObjectOfType<Movement2>();
         player.OnNewTileEntered += Player_OnNewTileEntered;
         InitialPosition = Vector3.zero;
         TileXLength = Floors[0].transform.localScale.x;
