@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     public float TurnSmoothTime = 0.1f;
     float TurnSmoothVel;
     public Animator animator;
+    public float AnimationSmoothness = 0.1f;
 
     // Update is called once per frame
     void Update()
@@ -32,13 +33,14 @@ public class Movement : MonoBehaviour
 
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y,targetangle , ref TurnSmoothVel , TurnSmoothTime );
 
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A) )
+        if(direction.magnitude > 0.1f)
         {
-            animator.SetFloat("speed", 0.5f);
+            animator.SetFloat("Blend", 1f, AnimationSmoothness,Time.deltaTime);   
+            
         }
         else
         {
-            animator.SetFloat("speed", 0);
+            animator.SetFloat("Blend", 0 , AnimationSmoothness , Time.deltaTime);
         }
     }
 
