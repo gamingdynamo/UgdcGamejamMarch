@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b66nvfv81anvt"
+path="res://.godot/imported/old_rustic_stand.obj-b5c4746e549f1d29a9ff4dbd366302d1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/old_rustic_stand.obj-b5c4746e549f1d29a9ff4dbd366302d1.mesh"]
+
+source_file="res://GitHub/UgdcGamejamMarch/Assets/Models/old_rustic_stand.obj"
+dest_files=["res://.godot/imported/old_rustic_stand.obj-b5c4746e549f1d29a9ff4dbd366302d1.mesh", "res://.godot/imported/old_rustic_stand.obj-b5c4746e549f1d29a9ff4dbd366302d1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
