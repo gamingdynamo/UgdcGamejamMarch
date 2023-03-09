@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
 
-    private bool Paused;
+    private bool Paused = false;
     public GameObject PausePanel;
 
     // Update is called once per frame
