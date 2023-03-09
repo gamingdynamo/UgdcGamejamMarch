@@ -2,35 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class Npc : MonoBehaviour
 {
+    [Header("Important")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;
+
+    [Header("Materials")]
+    [SerializeField] Material playerIsCloseMaterial;
+    [SerializeField] Material isFriendMaterial;
+    [SerializeField] Material goodFriendMaterial;
+    [SerializeField] Material badFriendMaterial;
+
+    [Header("Good or bad friend")]
+    [SerializeField] private bool goodFriend;
+
+    [Header("Text")]
+    [SerializeField] private TextMeshProUGUI goodFriendNumberText;
+    [SerializeField] private TextMeshProUGUI badFriendNumberText;
+
+    private int goodFriendNumber;
+    private int badFriendNumber;
+
+    private bool isFriend = false;
+ 
+    private float distanceToPlayer;
 
     private Vector3 offset;
 
     private bool canGo = true;
 
-    private Bounds bndFloor;
-
 	private enum NpcType{
-        Npc1,
-        Npc2,
-        Npc3
+        GoRandom,
+        GoAroundPlayer,
+        GoAwayFromPlayer
 	}
 
+    [Header("Npc type")]
     [SerializeField] private NpcType state;
-
-	private void Start()
-	{
-        bndFloor = GameObject.Find("Terrain").GetComponent<Renderer>().bounds;
-	}
 
 	void Update()
     {
         switch (state) {
-            case NpcType.Npc1:
+            case NpcType.GoRandom:
                 if (canGo)
                 {
                     SetRandomDestination();
@@ -38,7 +54,7 @@ public class Npc : MonoBehaviour
                     Invoke("Delay", 7f);
                 }
                 break;
-            case NpcType.Npc2:
+            case NpcType.GoAroundPlayer:
                 if (canGo)
 				{
                     SetDestinationAroundPlayer();
@@ -46,17 +62,48 @@ public class Npc : MonoBehaviour
                     Invoke("Delay", 7f);
                 }
                 break;
-            case NpcType.Npc3:
+            case NpcType.GoAwayFromPlayer:
+                if (canGo)
+                {
+                    SetDestinationAwayFromPlayer();
+                    canGo = false;
+                    Invoke("Delay", 7f);
+                }
                 break;
         }
+
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= 1.75f && isFriend == false)
+		{
+            transform.GetChild(0).GetComponent<MeshRenderer>().material = playerIsCloseMaterial;
+
+            if (Input.GetKeyDown(KeyCode.E))
+			{
+                isFriend = true;
+
+                AddFriend();
+			}
+
+        }
+        else if (distanceToPlayer > 2.5 && isFriend == false)
+        {
+            if (goodFriend)
+			{
+                transform.GetChild(0).GetComponent<MeshRenderer>().material = goodFriendMaterial;
+            }
+
+            else
+			{
+                transform.GetChild(0).GetComponent<MeshRenderer>().material = badFriendMaterial;
+            }
+        }
+        else if (isFriend) { transform.GetChild(0).GetComponent<MeshRenderer>().material = isFriendMaterial; }
     }
 
     private void SetRandomDestination()
 	{
-        float x = Random.Range(bndFloor.min.x, bndFloor.max.x);
-        float z = Random.Range(bndFloor.min.z, bndFloor.max.z);
-
-        agent.SetDestination(new Vector3(x, 0f, z));
+        agent.SetDestination(new Vector3(Random.Range(-500, 500), 0f, Random.Range(-500, 500)));
 	}
 
     private void SetDestinationAroundPlayer()
@@ -66,8 +113,23 @@ public class Npc : MonoBehaviour
         agent.SetDestination(player.position + offset);
 	}
 
+    private void SetDestinationAwayFromPlayer()
+	{
+        offset = new Vector3(Random.Range(Random.Range(-25f, -15f), Random.Range(15f,25f)), 0f, Random.Range(Random.Range(-25f, -15f), Random.Range(15f, 25f)));
+
+        agent.SetDestination(player.position + offset);
+    }
+
     private void Delay()
     {
         canGo = true;
     }
+
+    private void AddFriend()
+	{
+        if (goodFriend) { goodFriendNumber++; goodFriendNumberText.text = goodFriendNumber.ToString(); }
+        if (!goodFriend) { badFriendNumber++; badFriendNumberText.text = badFriendNumber.ToString(); }
+    }
+
+
 }

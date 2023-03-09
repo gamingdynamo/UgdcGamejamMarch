@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cwv1spvagqqpn"
+path="res://.godot/imported/AbandonedDoor-01.obj-5d68c04ac33df0eed02cd33d39f0821f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/AbandonedDoor-01.obj-5d68c04ac33df0eed02cd33d39f0821f.mesh"]
+
+source_file="res://GitHub/UgdcGamejamMarch/Assets/Models/AbandonedDoor-01.obj"
+dest_files=["res://.godot/imported/AbandonedDoor-01.obj-5d68c04ac33df0eed02cd33d39f0821f.mesh", "res://.godot/imported/AbandonedDoor-01.obj-5d68c04ac33df0eed02cd33d39f0821f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
