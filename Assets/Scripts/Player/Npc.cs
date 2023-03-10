@@ -16,12 +16,15 @@ public class Npc : MonoBehaviour
     [SerializeField] Material goodFriendMaterial;
     [SerializeField] Material badFriendMaterial;
 
+
     [Header("Good or bad friend")]
     [SerializeField] private bool goodFriend;
 
     private bool isFriend = false;
  
     private float distanceToPlayer;
+
+    
 
     private Vector3 offset;
 
@@ -36,8 +39,13 @@ public class Npc : MonoBehaviour
     [Header("Npc type")]
     [SerializeField] private NpcType state;
 
-	void Update()
+    void Update()
     {
+        //If you want then you can enable!
+       // transform.LookAt(player.transform.position);
+
+
+
         switch (state) {
             case NpcType.GoRandom:
                 if (canGo)
@@ -70,25 +78,28 @@ public class Npc : MonoBehaviour
         if (distanceToPlayer <= 1.75f && isFriend == false)
 		{
             transform.GetChild(0).GetComponent<MeshRenderer>().material = playerIsCloseMaterial;
+          
 
             if (Input.GetKeyDown(KeyCode.E))
 			{
                 isFriend = true;
-
                 GameObject.FindObjectOfType<FriendsCounter>().AddFriendsNumber(goodFriend);
+  
 			}
 
         }
         else if (distanceToPlayer > 2.5 && isFriend == false)
         {
+
             if (goodFriend)
-			{
+            {
                 transform.GetChild(0).GetComponent<MeshRenderer>().material = goodFriendMaterial;
             }
 
             else
-			{
+            {
                 transform.GetChild(0).GetComponent<MeshRenderer>().material = badFriendMaterial;
+              
             }
         }
         else if (isFriend) { transform.GetChild(0).GetComponent<MeshRenderer>().material = isFriendMaterial; }
@@ -122,6 +133,8 @@ public class Npc : MonoBehaviour
     {
         canGo = true;
     }
+
+
 
 
 }

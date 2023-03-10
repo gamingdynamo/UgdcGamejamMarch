@@ -7,6 +7,7 @@ public class Pause : MonoBehaviour
 
     private bool Paused;
     public GameObject PausePanel;
+    public GameObject controlspanel;
 
 
     private void Start()
@@ -17,23 +18,6 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Escape) && Paused == false)
-        {
-            if (Paused == false)
-            {
-                PausePanel.SetActive(true);
-                Time.timeScale = 0f;
-                Paused = true;
-            }
-
-             if (Paused == true)
-            {
-                PausePanel.gameObject.SetActive(false);
-                Time.timeScale = 1f;
-                Paused = false;
-            }
-        }
 
 
     }
@@ -63,5 +47,20 @@ public class Pause : MonoBehaviour
         PausePanel.gameObject.SetActive(false);
         Time.timeScale = 1f;
         Paused = false;
+    }
+    
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ControlsPanel()
+    {
+        controlspanel.gameObject.SetActive(true);
+    }
+
+    public void ExitControlsPanel()
+    {
+        controlspanel.SetActive(false);
     }
 }
