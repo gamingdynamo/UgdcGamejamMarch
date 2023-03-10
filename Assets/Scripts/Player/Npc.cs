@@ -19,13 +19,6 @@ public class Npc : MonoBehaviour
     [Header("Good or bad friend")]
     [SerializeField] private bool goodFriend;
 
-    [Header("Text")]
-    [SerializeField] private TextMeshProUGUI goodFriendNumberText;
-    [SerializeField] private TextMeshProUGUI badFriendNumberText;
-
-    private int goodFriendNumber;
-    private int badFriendNumber;
-
     private bool isFriend = false;
  
     private float distanceToPlayer;
@@ -82,7 +75,7 @@ public class Npc : MonoBehaviour
 			{
                 isFriend = true;
 
-                AddFriend();
+                GameObject.FindObjectOfType<FriendsCounter>().AddFriendsNumber(goodFriend);
 			}
 
         }
@@ -99,6 +92,11 @@ public class Npc : MonoBehaviour
             }
         }
         else if (isFriend) { transform.GetChild(0).GetComponent<MeshRenderer>().material = isFriendMaterial; }
+
+        if (isFriend)
+		{
+            Destroy(gameObject, 7f);
+		}
     }
 
     private void SetRandomDestination()
@@ -123,12 +121,6 @@ public class Npc : MonoBehaviour
     private void Delay()
     {
         canGo = true;
-    }
-
-    private void AddFriend()
-	{
-        if (goodFriend) { goodFriendNumber++; goodFriendNumberText.text = goodFriendNumber.ToString(); }
-        if (!goodFriend) { badFriendNumber++; badFriendNumberText.text = badFriendNumber.ToString(); }
     }
 
 
