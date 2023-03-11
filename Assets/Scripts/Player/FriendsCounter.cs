@@ -33,10 +33,7 @@ public class FriendsCounter : MonoBehaviour
 		 
 	}
 
-    private void Start()
-    {
-		Cursor.lockState = CursorLockMode.Locked;
-	}
+
 
 
     public void AddFriendsNumber(bool goodFriend)
