@@ -8,7 +8,7 @@ public class Npc : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Transform player;
+    private Transform player;
 
     [Header("Materials")]
     [SerializeField] Material playerIsCloseMaterial;
@@ -18,7 +18,7 @@ public class Npc : MonoBehaviour
 
 
     [Header("Good or bad friend")]
-    [SerializeField] private bool goodFriend;
+    [SerializeField] public bool goodFriend;
 
     private bool isFriend = false;
  
@@ -42,9 +42,9 @@ public class Npc : MonoBehaviour
     void Update()
     {
         //If you want then you can enable!
-       // transform.LookAt(player.transform.position);
+        // transform.LookAt(player.transform.position);
 
-
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         switch (state) {
             case NpcType.GoRandom:
@@ -108,6 +108,8 @@ public class Npc : MonoBehaviour
 		{
             Destroy(gameObject, 7f);
 		}
+
+        
     }
 
     private void SetRandomDestination()
