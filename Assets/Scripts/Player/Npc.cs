@@ -16,6 +16,7 @@ public class Npc : MonoBehaviour
     [SerializeField] Material goodFriendMaterial;
     [SerializeField] Material badFriendMaterial;
 
+    public FriendsCounter friends;
 
     [Header("Good or bad friend")]
     [SerializeField] private bool goodFriend;
@@ -39,6 +40,10 @@ public class Npc : MonoBehaviour
     [Header("Npc type")]
     [SerializeField] private NpcType state;
 
+    private void Start()
+    {
+        friends = GameObject.FindObjectOfType<FriendsCounter>();
+    }
     void Update()
     {
         //If you want then you can enable!
@@ -84,8 +89,14 @@ public class Npc : MonoBehaviour
 			{
                 isFriend = true;
                 GameObject.FindObjectOfType<FriendsCounter>().AddFriendsNumber(goodFriend);
+
   
 			}
+
+            else
+            {
+               
+            }
 
         }
         else if (distanceToPlayer > 2.5 && isFriend == false)

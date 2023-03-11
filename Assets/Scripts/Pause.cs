@@ -13,6 +13,7 @@ public class Pause : MonoBehaviour
     private void Start()
     {
         Paused = false;
+        
     }
 
     // Update is called once per frame
@@ -62,5 +63,21 @@ public class Pause : MonoBehaviour
     public void ExitControlsPanel()
     {
         controlspanel.SetActive(false);
+    }
+
+    public GameObject ObjectivePanelp;
+
+    public void ObjectivePanel()
+    {
+        Time.timeScale = 0f;
+        ObjectivePanelp.gameObject.SetActive(true);
+       
+    }
+
+    public void ExitObjectPanel()
+    {
+        Time.timeScale = 1f;
+        ObjectivePanelp.gameObject.SetActive(false);
+        
     }
 }
