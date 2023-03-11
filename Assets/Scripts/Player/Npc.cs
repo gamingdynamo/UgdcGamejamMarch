@@ -89,13 +89,15 @@ public class Npc : MonoBehaviour
 			{
                 isFriend = true;
                 GameObject.FindObjectOfType<FriendsCounter>().AddFriendsNumber(goodFriend);
-
+                GameObject.FindObjectOfType<AudioManager>().PlaySound("AddGoodFriend");
   
 			}
 
-            else
-            {
-               
+            if (Input.GetKeyDown(KeyCode.F) && GameObject.FindObjectOfType<PlayerTasks>().killFriend && !goodFriend)
+			{
+                Destroy(gameObject);
+                GameObject.FindObjectOfType<PlayerTasks>().killFriend = false;
+
             }
 
         }
@@ -119,8 +121,7 @@ public class Npc : MonoBehaviour
 		{
             Destroy(gameObject, 7f);
 		}
-
-        
+      
     }
 
     private void SetRandomDestination()

@@ -17,8 +17,10 @@ public class FriendsCounter : MonoBehaviour
 	[Header("Sounds")]
 	[SerializeField] private AudioSource goodfriend, badfriend;
 
-	private int goodFriendNumber;
-	private int badFriendNumber;
+	[HideInInspector]
+	public int goodFriendNumber;
+	[HideInInspector]
+	public int badFriendNumber;
 	private int PointsNumber;
 	private float timer;
 
@@ -27,10 +29,7 @@ public class FriendsCounter : MonoBehaviour
     {
 		timer += Time.deltaTime;
 		Time.timeScale += (1f / duration) * Time.unscaledDeltaTime;
-		Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-
-		
-		 
+		Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);	 
 	}
 
 
@@ -39,11 +38,11 @@ public class FriendsCounter : MonoBehaviour
     public void AddFriendsNumber(bool goodFriend)
 	{
 		if (goodFriend) {
+			GameObject.FindObjectOfType<AudioManager>().PlaySound("AddGoodFriend");
 			goodFriendNumber++;
 			PointsNumber++;
 			goodFriendsText.text = goodFriendNumber.ToString();
 			PointsText.text = PointsNumber.ToString();
-			goodfriend.Play();
 
 			DoSlowMo();
 			
@@ -51,13 +50,14 @@ public class FriendsCounter : MonoBehaviour
 			
 		}
 		if (!goodFriend) {
+			GameObject.FindObjectOfType<AudioManager>().PlaySound("AddBadFriend");
 			badFriendNumber++;
 
 				PointsNumber--;
             
 			badFriendsText.text = badFriendNumber.ToString();
 			PointsText.text = PointsNumber.ToString();
-			badfriend.Play();
+
 			DoSlowMo();
 			
 
