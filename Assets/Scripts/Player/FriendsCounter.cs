@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 using TMPro;
-
 
 public class FriendsCounter : MonoBehaviour
 {
@@ -11,9 +11,30 @@ public class FriendsCounter : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI goodFriendsText;
 	[SerializeField] private TextMeshProUGUI PointsText;
 
+	public float SlowDownFactor = 0.05f;
+	public float duration = 2f;
+
+	[Header("Sounds")]
+	[SerializeField] private AudioSource goodfriend, badfriend;
+
 	private int goodFriendNumber;
 	private int badFriendNumber;
 	private int PointsNumber;
+	private float timer;
+
+	float intensity;
+    private void Update()
+    {
+		timer += Time.deltaTime;
+		Time.timeScale += (1f / duration) * Time.unscaledDeltaTime;
+		Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+
+		
+		 
+	}
+
+
+
 
     public void AddFriendsNumber(bool goodFriend)
 	{
@@ -22,7 +43,12 @@ public class FriendsCounter : MonoBehaviour
 			PointsNumber++;
 			goodFriendsText.text = goodFriendNumber.ToString();
 			PointsText.text = PointsNumber.ToString();
-			GameObject.FindObjectOfType<AudioManager>().PlaySound("AddGoodFriend");
+			goodfriend.Play();
+
+			DoSlowMo();
+			
+			
+			
 		}
 		if (!goodFriend) {
 			badFriendNumber++;
@@ -31,7 +57,20 @@ public class FriendsCounter : MonoBehaviour
             
 			badFriendsText.text = badFriendNumber.ToString();
 			PointsText.text = PointsNumber.ToString();
-			GameObject.FindObjectOfType<AudioManager>().PlaySound("AddBadFriend");
+			badfriend.Play();
+			DoSlowMo();
+			
+
+
 		}
+	}
+
+	void DoSlowMo()
+    {
+		
+		Time.timeScale = SlowDownFactor;
+		Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+		
 	}
 }
