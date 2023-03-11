@@ -1,26 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class Pause : MonoBehaviour
 {
 
     private bool Paused;
     public GameObject PausePanel;
     public GameObject controlspanel;
-
-
+    public Slider slider;
+    public AudioSource bgmusic;
+    public TextMeshProUGUI volumetext;
     private void Start()
     {
         Paused = false;
+        bgmusic.volume = .5f;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
+        bgmusic.volume = slider.value;
+        volumetext.text = bgmusic.volume.ToString();
     }
 
 

@@ -24,9 +24,12 @@ public class FriendsCounter : MonoBehaviour
 	private int PointsNumber;
 	private float timer;
 
+	public GameObject ControlsPanel;
+
 	float intensity;
     private void Update()
     {
+		Cursor.lockState = CursorLockMode.None;
 		timer += Time.deltaTime;
 		Time.timeScale += (1f / duration) * Time.unscaledDeltaTime;
 		Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);	 
