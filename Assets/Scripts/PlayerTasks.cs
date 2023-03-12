@@ -59,16 +59,20 @@ public class PlayerTasks : MonoBehaviour
 			case Task.KILLONEFRIEND:
 				currentTaskText.text = "Kill 1 bad friend";
 				killFriend = true;
+				
 				task = Task.NONE;
+				
 				break;
 			case Task.NONE:
+				
 				if (killFriend == false)
 				{
 					currentTaskText.text = "You won";
-					successsound.Play();
+				
 					YouWonPanel.gameObject.SetActive(true);
+
 					
-					Time.timeScale = 0f;
+					successsound.Play();
 				}
 				break;
 				
