@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour
 {
 
@@ -16,6 +17,7 @@ public class Pause : MonoBehaviour
     {
         Paused = false;
         bgmusic.volume = .5f;
+        slider.value = 0.5f;
         
     }
 
@@ -82,5 +84,10 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
         ObjectivePanelp.gameObject.SetActive(false);
         
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -25,14 +25,27 @@ public class FriendsCounter : MonoBehaviour
 	private float timer;
 
 	public GameObject ControlsPanel;
+	private float distancetonpc;
+
+	private Transform player;
+	private GameObject npc;
+	private Npc npcscript;
 
 	float intensity;
+
+    private void Start()
+    {
+		npc = GameObject.FindGameObjectWithTag("npc");
+		npcscript = FindObjectOfType<Npc>();
+    }
+
+
     private void Update()
     {
 		Cursor.lockState = CursorLockMode.None;
 		timer += Time.deltaTime;
 		Time.timeScale += (1f / duration) * Time.unscaledDeltaTime;
-		Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);	 
+		Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
 	}
 
 
@@ -76,4 +89,20 @@ public class FriendsCounter : MonoBehaviour
 
 		
 	}
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.CompareTag("npc"))
+        {
+			ControlsPanel.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("npc"))
+        {
+			ControlsPanel.gameObject.SetActive(false);
+		}
+    }
 }

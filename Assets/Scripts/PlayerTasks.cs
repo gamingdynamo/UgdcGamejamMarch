@@ -7,6 +7,8 @@ public class PlayerTasks : MonoBehaviour
 {
 	[Header("Important")]
 	[SerializeField] TextMeshProUGUI currentTaskText;
+	public GameObject YouWonPanel;
+	public AudioSource successsound;
 
 	private enum Task
 	{
@@ -25,6 +27,7 @@ public class PlayerTasks : MonoBehaviour
 	private void Start()
 	{
 		task = Task.GETONEFRIEND;
+		YouWonPanel.gameObject.SetActive(false);
 	}
 
 	private void Update()
@@ -33,7 +36,7 @@ public class PlayerTasks : MonoBehaviour
 		switch(task)
 		{
 			case Task.GETONEFRIEND:
-				currentTaskText.text = "Get 1 good friends";
+				currentTaskText.text = "Get 1 good friend";
 				if (GameObject.FindObjectOfType<FriendsCounter>().goodFriendNumber >= 1)
 				{
 					task = Task.GETFIVEFRIENDS;
@@ -62,6 +65,10 @@ public class PlayerTasks : MonoBehaviour
 				if (killFriend == false)
 				{
 					currentTaskText.text = "You won";
+					successsound.Play();
+					YouWonPanel.gameObject.SetActive(true);
+					
+					Time.timeScale = 0f;
 				}
 				break;
 				

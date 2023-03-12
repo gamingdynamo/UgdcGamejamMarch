@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.UI;
 
 public class Npc : MonoBehaviour
 {
@@ -21,11 +22,9 @@ public class Npc : MonoBehaviour
     [Header("Good or bad friend")]
     [SerializeField] public bool goodFriend;
 
-    private bool isFriend = false;
+    public bool isFriend = false;
  
     private float distanceToPlayer;
-
-    
 
     private Vector3 offset;
 
@@ -43,6 +42,8 @@ public class Npc : MonoBehaviour
     private void Start()
     {
         friends = GameObject.FindObjectOfType<FriendsCounter>();
+      
+        
     }
     void Update()
     {
@@ -83,7 +84,7 @@ public class Npc : MonoBehaviour
         if (distanceToPlayer <= 1.75f && isFriend == false)
 		{
             transform.GetChild(0).GetComponent<MeshRenderer>().material = playerIsCloseMaterial;
-          
+           
 
             if (Input.GetKeyDown(KeyCode.E))
 			{
@@ -103,7 +104,7 @@ public class Npc : MonoBehaviour
         }
         else if (distanceToPlayer > 2.5 && isFriend == false)
         {
-
+           
             if (goodFriend)
             {
                 transform.GetChild(0).GetComponent<MeshRenderer>().material = goodFriendMaterial;
